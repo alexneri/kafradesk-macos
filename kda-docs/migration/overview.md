@@ -506,7 +506,7 @@ X-GNOME-Autostart-enabled=true
 
 #### macOS (Launch Agent)
 
-Create `~/Library/LaunchAgents/com.endersoft.kafra.plist`:
+Create `~/Library/LaunchAgents/moe.sei.kafra.plist`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -514,7 +514,7 @@ Create `~/Library/LaunchAgents/com.endersoft.kafra.plist`:
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.endersoft.kafra</string>
+    <string>moe.sei.kafra</string>
     <key>ProgramArguments</key>
     <array>
         <string>/Applications/Kafra Desktop.app/Contents/MacOS/Kafra Desktop</string>
@@ -529,7 +529,7 @@ Create `~/Library/LaunchAgents/com.endersoft.kafra.plist`:
 
 Enable:
 ```bash
-launchctl load ~/Library/LaunchAgents/com.endersoft.kafra.plist
+launchctl load ~/Library/LaunchAgents/moe.sei.kafra.plist
 ```
 
 ---

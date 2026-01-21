@@ -1,0 +1,100 @@
+[
+  {
+    "id": "original-blossom",
+    "displayName": "Blossom",
+    "edition": "original",
+    "imageName": "original-blossom",
+    "blinkImageName": null
+  },
+  {
+    "id": "sakura-blossom",
+    "displayName": "Blossom",
+    "edition": "sakura",
+    "imageName": "sakura-blossom",
+    "blinkImageName": null
+  },
+  {
+    "id": "original-curly-sue",
+    "displayName": "Curly Sue",
+    "edition": "original",
+    "imageName": "original-curly-sue",
+    "blinkImageName": null
+  },
+  {
+    "id": "sakura-curly-sue",
+    "displayName": "Curly Sue",
+    "edition": "sakura",
+    "imageName": "sakura-curly-sue",
+    "blinkImageName": null
+  },
+  {
+    "id": "original-jasmine",
+    "displayName": "Jasmine",
+    "edition": "original",
+    "imageName": "original-jasmine",
+    "blinkImageName": null
+  },
+  {
+    "id": "sakura-jasmine",
+    "displayName": "Jasmine",
+    "edition": "sakura",
+    "imageName": "sakura-jasmine",
+    "blinkImageName": null
+  },
+  {
+    "id": "original-leila",
+    "displayName": "Leila",
+    "edition": "original",
+    "imageName": "original-leila",
+    "blinkImageName": null
+  },
+  {
+    "id": "sakura-leila",
+    "displayName": "Leila",
+    "edition": "sakura",
+    "imageName": "sakura-leila",
+    "blinkImageName": null
+  },
+  {
+    "id": "original-pavianne",
+    "displayName": "Pavianne",
+    "edition": "original",
+    "imageName": "original-pavianne",
+    "blinkImageName": null
+  },
+  {
+    "id": "sakura-pavianne",
+    "displayName": "Pavianne",
+    "edition": "sakura",
+    "imageName": "sakura-pavianne",
+    "blinkImageName": null
+  },
+  {
+    "id": "original-roxie",
+    "displayName": "Roxie",
+    "edition": "original",
+    "imageName": "original-roxie",
+    "blinkImageName": null
+  },
+  {
+    "id": "sakura-roxie",
+    "displayName": "Roxie",
+    "edition": "sakura",
+    "imageName": "sakura-roxie",
+    "blinkImageName": null
+  },
+  {
+    "id": "original-sampaguita",
+    "displayName": "Sampaguita",
+    "edition": "original",
+    "imageName": "original-sampaguita",
+    "blinkImageName": null
+  },
+  {
+    "id": "sakura-sampaguita",
+    "displayName": "Sampaguita",
+    "edition": "sakura",
+    "imageName": "sakura-sampaguita",
+    "blinkImageName": null
+  }
+]

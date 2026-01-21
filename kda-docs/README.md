@@ -282,12 +282,42 @@ This documentation follows:
 
 ### Version History
 
+**Version 1.1** (2026-01-20)
+- Added Task 11: Packaging and Distribution
+- Enhanced Tasks 08-09 with security requirements
+- Added implementation timeline with parallel execution plan
+- Added character edition strategy document
+- Added comprehensive task review summary
+- Updated migration guide references
+
 **Version 1.0** (2026-01-20)
 - Initial comprehensive documentation
 - Complete reference documentation
 - Cross-platform migration guide
 - Security analysis
 - Architecture documentation
+
+---
+
+## Implementation Tasks (macOS Port)
+
+### Core Development Tasks
+- [Task 01: App Foundation and Shared Services](tasks/01-app-foundation.md)
+- [Task 02: Import Character Assets and Metadata](tasks/02-character-assets.md)
+- [Task 03: Mascot Window Host](tasks/03-mascot-window-host.md)
+- [Task 04: Mascot Rendering and Animation](tasks/04-mascot-rendering-animation.md)
+- [Task 05: Preferences and Persistence](tasks/05-preferences-persistence.md)
+- [Task 06: Status Bar Menu and Commands](tasks/06-status-bar-menu.md)
+- [Task 07: Memo Feature (SwiftData)](tasks/07-memo-feature.md)
+- [Task 08: Storage Browser](tasks/08-storage-browser.md) — ⚡ **Enhanced with security**
+- [Task 09: Drag and Drop Integration](tasks/09-drag-and-drop.md) — ⚡ **Enhanced with security**
+- [Task 10: Notifications and About Window](tasks/10-notifications-about.md)
+- [Task 11: Packaging and Distribution](tasks/11-packaging-distribution.md) — ⭐ **New**
+
+### Planning and Strategy
+- [📋 **Task Review Summary**](tasks/TASK-REVIEW-SUMMARY.md) — Architecture alignment analysis
+- [📅 **Implementation Timeline**](tasks/implementation-timeline.md) — Parallel execution plan (32% time savings)
+- [🎨 **Edition Strategy**](migration/edition-strategy.md) — Original vs Sakura character handling
 
 ---
 
@@ -300,13 +330,16 @@ This documentation follows:
 → Browse [Reference Documentation](reference/README.md)
 
 **Porting to Another Platform?**
-→ Follow [Migration Guide](migration/overview.md)
+→ Read [Task Review Summary](tasks/TASK-REVIEW-SUMMARY.md) then follow [Migration Guide](migration/overview.md)
+
+**Implementing the macOS Port?**
+→ Review [Implementation Timeline](tasks/implementation-timeline.md) and [Edition Strategy](migration/edition-strategy.md)
 
 **Concerned About Security?**
-→ Review [Security Considerations](explanation/security.md)
+→ Review [Security Considerations](explanation/security.md) and security-enhanced Tasks 08-09
 
 ---
 
-**Documentation Version:** 1.0  
+**Documentation Version:** 1.1  
 **Last Updated:** 2026-01-20  
 **Maintained By:** DevContext Documentation Team
