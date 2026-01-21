@@ -258,7 +258,7 @@
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SELECTED_FILES = read-write;
+				ENABLE_USER_SELECTED_FILES = "read-write";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Kafra Desktop";
 				INFOPLIST_KEY_CFBundleName = "Kafra Desktop Assistant";
@@ -269,8 +269,8 @@
 				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "Kafra Desktop Assistant needs access to your Documents to manage files you drag and drop.";
 				INFOPLIST_KEY_NSDownloadsFolderUsageDescription = "Kafra Desktop Assistant needs access to your Downloads to manage files you drag and drop.";
 				INFOPLIST_KEY_NSHighResolutionCapable = YES;
-				INFOPLIST_KEY_NSRequiresAquaSystemAppearance = NO;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 SG Reserach | Crosse_ | Alex Neri. Fan work inspired by Ragnarok Online.";
+				INFOPLIST_KEY_NSRequiresAquaSystemAppearance = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -301,7 +301,7 @@
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
-				ENABLE_USER_SELECTED_FILES = read-write;
+				ENABLE_USER_SELECTED_FILES = "read-write";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Kafra Desktop";
 				INFOPLIST_KEY_CFBundleName = "Kafra Desktop Assistant";
@@ -312,8 +312,8 @@
 				INFOPLIST_KEY_NSDocumentsFolderUsageDescription = "Kafra Desktop Assistant needs access to your Documents to manage files you drag and drop.";
 				INFOPLIST_KEY_NSDownloadsFolderUsageDescription = "Kafra Desktop Assistant needs access to your Downloads to manage files you drag and drop.";
 				INFOPLIST_KEY_NSHighResolutionCapable = YES;
-				INFOPLIST_KEY_NSRequiresAquaSystemAppearance = NO;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2026 SG Reserach | Crosse_ | Alex Neri. Fan work inspired by Ragnarok Online.";
+				INFOPLIST_KEY_NSRequiresAquaSystemAppearance = NO;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

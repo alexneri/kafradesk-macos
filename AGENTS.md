@@ -68,6 +68,10 @@ xcodebuild -project "Kafra Desktop Assistant/Kafra Desktop Assistant.xcodeproj" 
 - Constants use `lowerCamelCase` (Swift convention, not SCREAMING_SNAKE_CASE)
 - Enum cases use `lowerCamelCase`
 
+### Imports Checklist
+- `import Combine` in any file declaring `ObservableObject` or `@Published`
+- `import os` in any file calling `Logger` / `AppLogger`
+
 ### Naming Guidelines
 - **Descriptive, Intention-Revealing Names:**
   ```swift
@@ -700,6 +704,13 @@ struct ViewName: View {
 - Check target membership of files
 - Clean build folder: `Cmd+Shift+K`
 
+**Build fails with ObservableObject/@Published errors or "missing import of Combine"**
+- Add `import Combine` to any file declaring `ObservableObject` or `@Published`
+- SwiftUI no longer re-exports Combine in newer toolchains
+
+**Build fails with Logger/AppLogger errors or "missing import of os"**
+- Add `import os` to any file that calls `Logger` methods
+
 **SwiftData crashes on launch**
 - Check model schema changes
 - Verify ModelContainer configuration
@@ -718,7 +729,7 @@ struct ViewName: View {
 ---
 
 **Document Version:** 2.0  
-**Last Updated:** 2026-01-20  
+**Last Updated:** 2026-01-21  
 **Maintained By:** DevContext Team
 
 **Key Changes from v1.0:**
