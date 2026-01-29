@@ -3,7 +3,7 @@
 <img width="634" height="483" alt="image" src="https://github.com/user-attachments/assets/b5bb30d9-fee2-4408-8fba-df5f6e43d1ca" />
 
 
-Kafra Desktop Assistant is a macOS SwiftUI app that ports the original Windows Kafra Desktop Assistant into a modern, native experience. The repository includes the current macOS implementation, legacy assets, and reference materials for porting behaviors and features.
+Kafra Desktop Assistant is a macOS SwiftUI app that ports the original Windows [Kafra Desktop Assistant](https://github.com/Planet-Source-Code/david-santos-ragnarok-themed-kafra-desktop-assistant__1-61365) by EnderSoft ([David Santos](https://github.com/Planet-Source-Code/PSCIndex/blob/master/ByAuthor/david-santos.md)) into a modern, native experience. The repository includes the current macOS implementation, legacy assets, and reference materials for porting behaviors and features.
 
 ## Repository Layout
 
