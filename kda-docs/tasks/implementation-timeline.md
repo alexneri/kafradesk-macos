@@ -6,9 +6,9 @@ This document provides an optimized implementation schedule for the Kafra Deskto
 
 ---
 
-## Current Implementation Status (as of 2026-01-21)
+## Current Implementation Status (as of 2026-02-25)
 
-**Overall:** Core app is runnable with mascot, menu bar controls, preferences, memos, storage browser, drag-and-drop, blurbs, and About window implemented. Packaging scripts and entitlements are in place, but signing/notarization/DMG validation remain.
+**Overall:** Core app is runnable with mascot, menu bar controls, preferences, memos, storage browser, drag-and-drop, blurbs, and About window implemented. Packaging scripts and entitlements are in place, but signing/notarization/DMG validation remain. Task 12 (mascot right-click context menu) is now planned as a UX enhancement.
 
 | Task | Status | Notes |
 |------|--------|-------|
@@ -23,6 +23,7 @@ This document provides an optimized implementation schedule for the Kafra Deskto
 | **09** | ✅ Completed | Drag-and-drop with validation + feedback implemented |
 | **10** | ✅ Completed | Blurb notifications + About window implemented |
 | **11** | ⏳ In Progress | Scripts and entitlements added; signing/notarization/DMG verification pending |
+| **12** | 📝 Planned | Right-click mascot opens the same command menu surface as status bar |
 
 ---
 
@@ -35,6 +36,8 @@ Task 01 (Foundation) → Task 03 (Window) → Task 05 (Preferences) → Task 06 
      ↓
    [Enables Parallel Work]
 ```
+
+Task 12 depends on Tasks 03 and 06 and can run in parallel with Phase 3 feature modules.
 
 ### Independent Workstreams (Can Be Parallel)
 
@@ -127,7 +130,7 @@ Task 01 (Foundation) → Task 03 (Window) → Task 05 (Preferences) → Task 06 
 
 ### Phase 3: Feature Modules (Weeks 3-4)
 **Duration:** 16-24 hours (longest workstream)  
-**Team Size:** 2 developers can work simultaneously  
+**Team Size:** 2-3 developers can work simultaneously  
 **Can Start:** After Phase 2 (both workstreams complete)
 
 #### Workstream C: Data Features
@@ -145,8 +148,15 @@ Task 01 (Foundation) → Task 03 (Window) → Task 05 (Preferences) → Task 06 
 
 **Workstream Total:** 16-24 hours sequential
 
-**⏱️ Phase 3 Duration:** 24 hours (longest path) vs 40 hours if sequential  
-**⚡ Time Saved:** 16 hours (40% reduction)
+#### Workstream E: Mascot Interaction UX
+| Task | Description | Time | Depends On | Owner |
+|------|-------------|------|------------|-------|
+| **Task 12** | Mascot right-click context menu | 6-8h | Task 03, 06 | Developer A |
+
+**Workstream Total:** 6-8 hours
+
+**⏱️ Phase 3 Duration:** 24 hours (longest path) vs 34-48 hours if sequential  
+**⚡ Time Saved:** 10-24 hours (~29-50% reduction)
 
 ---
 
@@ -166,28 +176,28 @@ Task 01 (Foundation) → Task 03 (Window) → Task 05 (Preferences) → Task 06 
 
 ## Timeline Comparison
 
-### Sequential Execution (Tasks 01→11 in order)
+### Sequential Execution (Tasks 01→12 in order)
 ```
 Week 1: Task 01 (12h) + Task 02 (12h) = 24h
 Week 2: Task 03 (12h) + Task 04 (12h) = 24h
 Week 3: Task 05 (8h) + Task 06 (8h) + Task 07 (16h) = 32h
 Week 4: Task 08 (14h) + Task 09 (10h) = 24h
-Week 5: Task 10 (6h) + Task 11 (14h) = 20h
+Week 5: Task 10 (6h) + Task 11 (14h) + Task 12 (8h) = 28h
 
-Total: 124 hours over 5 weeks (24.8 hours/week average)
+Total: 132 hours over 5 weeks (26.4 hours/week average)
 ```
 
 ### Parallel Execution (This Plan)
 ```
 Week 1: Task 01 = 12h
 Week 2-3: [Task 03→05→06] || [Task 02→04] = 28h (longest path)
-Week 3-4: [Task 07] || [Task 08→09] = 24h (longest path)
+Week 3-4: [Task 07] || [Task 08→09] || [Task 12] = 24h (longest path)
 Week 5: Task 10→11 = 20h
 
 Total: 84 hours over 5 weeks (16.8 hours/week average)
 ```
 
-**⚡ Overall Time Savings: 40 hours (32% reduction)**
+**⚡ Overall Time Savings: 48 hours (36% reduction)**
 
 ---
 
@@ -197,7 +207,7 @@ Total: 84 hours over 5 weeks (16.8 hours/week average)
 **Timeline:** 12-15 weeks part-time (10h/week)
 ```
 Sequential execution required
-Estimated: 120-150 hours total
+Estimated: 130-160 hours total
 Pace: ~10 hours/week
 ```
 
@@ -219,11 +229,12 @@ Pace: ~10 hours/week
 **Week 3-4:**
 - Dev A: Task 07 (Memos) or Task 10 (Notifications)
 - Dev B: Tasks 08-09 (Storage + Drag-Drop)
+- Dev A or Dev B: Task 12 (Mascot context menu)
 
 **Week 4:**
 - Dev A & B: Task 11 (Distribution), final testing
 
-**Total:** 80-90 developer-hours (40-45 hours per person)
+**Total:** 86-98 developer-hours (43-49 hours per person)
 
 ---
 
@@ -243,12 +254,12 @@ Pace: ~10 hours/week
 - Dev D: Task 08 (Storage)
 
 **Week 3:**
-- Dev A: Task 10 (Notifications)
+- Dev A: Task 10 (Notifications) + Task 12 (Mascot context menu)
 - Dev B: Task 09 (Drag-Drop)
 - Dev C: Task 11 (Distribution)
 - Dev D: Testing & bug fixes
 
-**Total:** 60-70 hours elapsed (distributed across team)
+**Total:** 66-78 hours elapsed (distributed across team)
 
 ---
 
@@ -267,6 +278,7 @@ Pace: ~10 hours/week
 | **09** | 03 (window), 08 (storage) | None | 02, 04, 07 |
 | **10** | All features | 11 | None |
 | **11** | 10 (complete app) | None | None |
+| **12** | 03 (window), 06 (menu) | None | 02, 04, 07, 08, 09 |
 
 ---
 
@@ -279,6 +291,8 @@ Task 01 → Task 03 → Task 05 → Task 06 → Task 08 → Task 09 → Task 10 
 
 Total Critical Path: 84 hours
 ```
+
+Task 12 (6-8h) is not on the critical path when parallel staffing is available, but it adds effort in strictly sequential execution.
 
 **This is the minimum possible timeline** even with unlimited parallel workers.
 
@@ -310,11 +324,12 @@ Total Critical Path: 84 hours
 ### Milestone 3: Full Feature Set 🚀
 - **When:** End of Week 4
 - **Deliverables:**
-  - All 10 tasks complete
+  - Tasks 01-10 and 12 complete
   - Memos working
   - Storage browser functional
   - Drag-drop operational
   - Preferences save/load
+  - Right-click mascot context menu operational
 - **Demo:** Walk through all app features
 
 ---
@@ -383,6 +398,7 @@ Drag-drop heavily depends on storage service.
 ✓ Drag-drop copies files
 ✓ Security validations trigger
 ✓ File operations update UI
+✓ Mascot right-click opens context menu and executes commands
 ```
 
 ### Phase 4 Testing
@@ -406,7 +422,7 @@ Drag-drop heavily depends on storage service.
 - AppKit experience
 - NSPanel, NSWindow customization
 - Window management on macOS
-- **Assigned:** Tasks 01, 03, 05, 06, 10
+- **Assigned:** Tasks 01, 03, 05, 06, 10, 12
 
 **Developer B (Graphics/Assets):**
 - SwiftUI views
@@ -448,9 +464,10 @@ Drag-drop heavily depends on storage service.
 If forced to cut scope, implement tasks in this order:
 1. ✅ Tasks 01-06 (Core mascot functionality) - **MUST HAVE**
 2. ✅ Task 08-09 (Storage + drag-drop) - **SHOULD HAVE**
-3. ⚠️ Task 07 (Memos) - **NICE TO HAVE** (can defer to v1.1)
-4. ⚠️ Task 10 (Blurb notifications) - **NICE TO HAVE**
-5. ✅ Task 11 (Distribution) - **MUST HAVE**
+3. ✅ Task 12 (Mascot context menu) - **SHOULD HAVE**
+4. ⚠️ Task 07 (Memos) - **NICE TO HAVE** (can defer to v1.1)
+5. ⚠️ Task 10 (Blurb notifications) - **NICE TO HAVE**
+6. ✅ Task 11 (Distribution) - **MUST HAVE**
 
 ---
 
@@ -471,9 +488,11 @@ Use this table to track actual vs estimated times:
 | 09 | 6-10h | ___ | ___ | ___ |
 | 10 | 4-6h | ___ | ___ | ___ |
 | 11 | 12-14h | ___ | ___ | ___ |
+| 12 | 6-8h | ___ | ___ | ___ |
 
 **Burn-down Chart:**
 ```
+130h ┤                                         
 120h ┤                                         
 110h ┤                                         
 100h ┤●                                        
@@ -495,7 +514,7 @@ Use this table to track actual vs estimated times:
 
 ## Conclusion
 
-By leveraging parallel development workstreams, the Kafra Desktop Assistant macOS port can be completed in **~84 hours of critical path work** versus **~124 hours sequential**, representing a **32% time savings**.
+By leveraging parallel development workstreams, the Kafra Desktop Assistant macOS port can be completed in **~84 hours of critical path work** versus **~132 hours sequential**, representing a **36% time savings**.
 
 **Optimal Team:** 2-3 developers over 3-4 weeks  
 **Solo Developer:** 12-15 weeks part-time  
@@ -503,6 +522,6 @@ By leveraging parallel development workstreams, the Kafra Desktop Assistant macO
 
 ---
 
-**Document Version:** 1.1  
-**Last Updated:** 2026-01-21  
+**Document Version:** 1.2  
+**Last Updated:** 2026-02-25  
 **Status:** Ready for execution planning

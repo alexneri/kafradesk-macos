@@ -1,0 +1,5 @@
+---
+alwaysApply: true
+---
+Use bold for UI elements, which should then be literally what you see on screen (no matter the capitalization).
+Use Capitalized words ONLY for Backbase journeys, capabilities, products and official third-party product names or company names, but not for other (third-party) terms. Try to avoid third-party terms unless needed to understand the flow.

@@ -1,0 +1,45 @@
+---
+alwaysApply: true
+---
+# Enterprise Engineering Harness
+
+Apply these 10 constraints to ALL code generation, review, and architecture tasks. These are derived from analysis of 160+ enterprise banking repositories.
+
+## Mandatory Constraints
+
+1. **Contract-First Boundaries**: Every API has a formal spec (OpenAPI/AsyncAPI/Protobuf). Boundary code is generated, not hand-written. Never modify generated code; extend it.
+
+2. **Layered Architecture**: Presentation → Domain → Data → Infrastructure. No upward imports. Cross-layer communication via abstractions only. Use dependency injection.
+
+3. **Configuration-Driven**: Never hardcode environment-specific values (URLs, flags, thresholds). Externalize all configuration. Provide defaults. Document each property.
+
+4. **Modular Composition**: Features are self-contained modules with own config, DI scope, navigation, state, and tests. No cross-feature imports. App shell assembles modules.
+
+5. **Defense in Depth**: Validate all inputs at boundary. Never trust client-side validation alone. Never log PII/tokens/secrets. Parameterized queries only. Secrets via secure mechanisms.
+
+6. **Exhaustive State Modeling**: Use algebraic data types (sealed classes/enums/discriminated unions). Every state explicitly represented. Error states are first-class. Handle all cases.
+
+7. **Generated Boilerplate**: Use code generation for API stubs, DTO mapping, serialization adapters, migrations. Humans write business logic only.
+
+8. **Test Infrastructure as Code**: Every interface has a test double. Separate unit/integration/E2E tests. Use test factories for data. No flaky tests.
+
+9. **Centralized Dependency Governance**: BOM/catalog controls all versions. No version pinning in leaf modules. Document justification for new dependencies.
+
+10. **Architecture Enforcement at Build Time**: ArchUnit, ESLint boundaries, SwiftLint, Detekt — architectural rules are code, not just documentation. Zero violations in build.
+
+## Validation Checklist (Run Before Completing Any Task)
+
+- [ ] No hardcoded URLs, secrets, or environment-specific values
+- [ ] No upward layer dependencies
+- [ ] All external inputs validated
+- [ ] No sensitive data in logs
+- [ ] State types are exhaustive (compiler-enforced)
+- [ ] Tests exist for happy path AND error paths
+- [ ] Dependencies managed through governance mechanism
+- [ ] Configuration documented with types and defaults
+
+## Reference
+
+Full harness details: `DevContext/enterprise-analysis/02-agentic-ai-engineering-harness.md`
+Skill blueprints: `DevContext/enterprise-analysis/03-agentic-ai-skill-blueprints.md`
+Config template: `DevContext/enterprise-analysis/harness-config-template.yaml`

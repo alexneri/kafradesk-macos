@@ -1,0 +1,436 @@
+# Feature Plan: [TICKET-ID] - [Brief Title]
+
+---
+
+## DISCOVER
+
+> *Understand the problem space, user needs, and current state*
+
+---
+
+### Problem Statement
+
+#### Summary
+
+[Brief 1-2 sentence summary of the problem or feature gap]
+
+#### Background
+
+[Context about why this feature/documentation is needed]
+
+#### User Impact
+
+| User Segment | Pain Point | Desired Outcome |
+|--------------|------------|-----------------|
+| [Segment 1]  | [Pain]     | [Outcome]       |
+| [Segment 2]  | [Pain]     | [Outcome]       |
+
+---
+
+### Discovery Research
+
+#### Current State Analysis
+
+- **What exists**: [Current documentation/features, if any]
+- **What's missing**: [Gaps identified]
+- **What's broken**: [Issues or inaccuracies]
+
+#### Technical Discovery
+
+| Area | Finding | Implication |
+|------|---------|-------------|
+| Codebase | [Finding] | [Impact] |
+| APIs | [Finding] | [Impact] |
+| Configuration | [Finding] | [Impact] |
+
+#### Stakeholder Insights
+
+| Source | Insight | Priority |
+|--------|---------|----------|
+| [User/Team] | [Insight] | [High/Medium/Low] |
+| [User/Team] | [Insight] | [High/Medium/Low] |
+
+---
+
+### Discovery Artifacts
+
+#### Relevant Code Locations
+
+```
+[repository]/[path/to/relevant/code]
+[repository]/[path/to/relevant/code]
+```
+
+#### Existing Documentation
+
+- `[path/to/existing-doc.adoc]` - [Status: Current/Outdated/Incomplete]
+- `[path/to/existing-doc.adoc]` - [Status: Current/Outdated/Incomplete]
+
+#### External References
+
+- [Link to relevant external documentation]
+- [Link to specifications or standards]
+
+---
+
+## DEFINE
+
+> *Define scope, structure, specifications, and success criteria*
+
+---
+
+### Scope Definition
+
+#### In Scope
+
+- [ ] Item 1
+- [ ] Item 2
+- [ ] Item 3
+
+#### Out of Scope
+
+- Item 1 (Reason: [why excluded])
+- Item 2 (Reason: [why excluded])
+
+#### Assumptions
+
+1. [Assumption 1]
+2. [Assumption 2]
+
+#### Constraints
+
+1. [Constraint 1]
+2. [Constraint 2]
+
+---
+
+### Feature Objectives
+
+| Objective | Success Metric | Target |
+|-----------|----------------|--------|
+| [Objective 1] | [Metric] | [Target value] |
+| [Objective 2] | [Metric] | [Target value] |
+| [Objective 3] | [Metric] | [Target value] |
+
+---
+
+### Information Architecture
+
+#### Content Structure
+
+```
+[Root Section]
+├── [Section 1]
+│   ├── [Subsection 1.1]
+│   └── [Subsection 1.2]
+├── [Section 2]
+│   ├── [Subsection 2.1]
+│   └── [Subsection 2.2]
+└── [Section 3]
+```
+
+#### New Files to Create
+
+| File Path | Purpose | Sections | Integration Point |
+|-----------|---------|----------|-------------------|
+| `[path/to/file.adoc]` | [Purpose] | [Sections] | [Where it fits] |
+| `[path/to/file.adoc]` | [Purpose] | [Sections] | [Where it fits] |
+
+#### Files to Update
+
+| File Path | Change Type | Description | Rationale |
+|-----------|-------------|-------------|-----------|
+| `[path/to/file.adoc]` | [Add/Modify/Remove] | [Description] | [Why] |
+| `[path/to/file.adoc]` | [Add/Modify/Remove] | [Description] | [Why] |
+
+#### Visual Assets
+
+| Asset Path | Type | Purpose |
+|------------|------|---------|
+| `[path/to/diagram.puml]` | [Sequence/Architecture/Flow] | [What it illustrates] |
+| `[path/to/image.png]` | [Screenshot/Diagram] | [What it shows] |
+
+---
+
+### Content Specifications
+
+#### Section 1: [Section Name]
+
+**Purpose**: [What this section accomplishes]
+
+**Key Points**:
+1. Point 1
+2. Point 2
+3. Point 3
+
+**Technical Details**:
+- Detail 1
+- Detail 2
+
+**Examples/Use Cases**:
+- Example 1: [Description]
+- Example 2: [Description]
+
+**Code Samples**:
+```[language]
+// Example code to include
+```
+
+#### Section 2: [Section Name]
+
+[Repeat structure as needed]
+
+---
+
+### Cross-References & Navigation
+
+| From | To | Link Type |
+|------|----|-----------|
+| `[source-file.adoc]` | `[target-file.adoc]` | [xref/include/link] |
+| `[source-file.adoc]` | `[target-file.adoc]` | [xref/include/link] |
+
+---
+
+### Release Notes (if applicable)
+
+**Change Type**: [FEATURE | ENHANCEMENT | BREAKING CHANGE | BUGFIX | DEPRECATION]
+
+**Title**: [Title following release note guidelines - max 160 characters]
+
+**Description**: 
+[Description following release note guidelines - max 2500 characters]
+
+**Upgrade Steps**:
+1. Step 1
+2. Step 2
+
+---
+
+### Acceptance Criteria
+
+#### Documentation Completeness
+- [ ] All identified gaps are addressed
+- [ ] All required sections are documented
+- [ ] Examples and use cases provided
+- [ ] Cross-references added and verified
+
+#### Technical Accuracy
+- [ ] All technical details verified against codebase
+- [ ] Code examples tested and validated
+- [ ] API endpoints and configurations are correct
+- [ ] Integration patterns match actual implementation
+
+#### Usability
+- [ ] Documentation is clear for target audience
+- [ ] Examples are practical and actionable
+- [ ] Navigation and structure are intuitive
+- [ ] Follows documentation style guidelines
+
+#### Quality
+- [ ] Follows AsciiDoc formatting standards
+- [ ] Diagrams are accurate and clear
+- [ ] All links work correctly
+- [ ] Grammar and spelling checked
+
+#### Engineering Harness Compliance
+- [ ] No hardcoded URLs, secrets, or environment-specific values
+- [ ] Layered architecture respected (no upward imports)
+- [ ] All external inputs validated at API boundary
+- [ ] No sensitive data in log statements
+- [ ] State types are exhaustive (sealed class/enum/discriminated union)
+- [ ] Error states explicitly modeled and tested
+- [ ] Configuration externalized with typed defaults
+- [ ] Dependencies managed through BOM/catalog governance
+- [ ] Architecture enforcement rules pass (ArchUnit/ESLint/SwiftLint/Detekt)
+- [ ] Test coverage: unit + integration + error paths
+
+---
+
+## DELIVER
+
+> *Implementation, review, and delivery*
+
+---
+
+### Implementation Phases
+
+#### Phase 1: [Phase Name]
+
+**Duration**: [X] days/hours  
+**Status**: [Not Started | In Progress | Complete]
+
+| Task | Owner | Status | Notes |
+|------|-------|--------|-------|
+| [Task 1] | [Name] | [ ] | [Notes] |
+| [Task 2] | [Name] | [ ] | [Notes] |
+
+**Deliverables**:
+- [ ] Deliverable 1
+- [ ] Deliverable 2
+
+#### Phase 2: [Phase Name]
+
+**Duration**: [X] days/hours  
+**Status**: [Not Started | In Progress | Complete]
+
+| Task | Owner | Status | Notes |
+|------|-------|--------|-------|
+| [Task 1] | [Name] | [ ] | [Notes] |
+| [Task 2] | [Name] | [ ] | [Notes] |
+
+**Deliverables**:
+- [ ] Deliverable 1
+- [ ] Deliverable 2
+
+#### Phase 3: Review & Finalize
+
+**Duration**: [X] days/hours  
+**Status**: [Not Started | In Progress | Complete]
+
+| Task | Owner | Status | Notes |
+|------|-------|--------|-------|
+| Technical Review | [Name] | [ ] | [Notes] |
+| Editorial Review | [Name] | [ ] | [Notes] |
+| Stakeholder Approval | [Name] | [ ] | [Notes] |
+
+---
+
+### Dependencies
+
+#### Required Resources
+
+| Resource Type | Resource | Purpose | Status |
+|---------------|----------|---------|--------|
+| Codebase Access | [Repository] | [Purpose] | [Available/Pending] |
+| SME | [Person/Team] | [Purpose] | [Available/Pending] |
+| Documentation | [Reference] | [Purpose] | [Available/Pending] |
+
+#### External Dependencies
+
+| Dependency | Owner | Impact | Status |
+|------------|-------|--------|--------|
+| [Dependency 1] | [Owner] | [Impact if delayed] | [Status] |
+| [Dependency 2] | [Owner] | [Impact if delayed] | [Status] |
+
+---
+
+### Risk Assessment
+
+| Risk | Probability | Impact | Mitigation Strategy |
+|------|-------------|--------|---------------------|
+| [Risk 1] | [High/Medium/Low] | [High/Medium/Low] | [Strategy] |
+| [Risk 2] | [High/Medium/Low] | [High/Medium/Low] | [Strategy] |
+
+---
+
+### Timeline Summary
+
+| Phase | Start | End | Duration |
+|-------|-------|-----|----------|
+| Phase 1: [Name] | [Date] | [Date] | [X] days |
+| Phase 2: [Name] | [Date] | [Date] | [X] days |
+| Phase 3: Review | [Date] | [Date] | [X] days |
+| **Total** | | | **[X] days** |
+
+---
+
+### Quality Gates
+
+| Gate | Criteria | Status | Sign-off |
+|------|----------|--------|----------|
+| Content Complete | All sections drafted | [ ] | [Name] |
+| Technical Review | Accuracy verified | [ ] | [Name] |
+| Editorial Review | Style/grammar checked | [ ] | [Name] |
+| Final Approval | Ready for publish | [ ] | [Name] |
+
+---
+
+### Delivery Checklist
+
+#### Pre-Delivery
+- [ ] All acceptance criteria met
+- [ ] All quality gates passed
+- [ ] Cross-references verified
+- [ ] Build passes locally
+
+#### Delivery
+- [ ] PR created with proper description
+- [ ] Reviewers assigned
+- [ ] CI/CD checks pass
+- [ ] Merge completed
+
+#### Post-Delivery
+- [ ] Documentation live and accessible
+- [ ] Navigation/search updated
+- [ ] Stakeholders notified
+- [ ] Feedback loop established
+
+---
+
+## TRACKING
+
+---
+
+### Implementation Status
+
+| Phase | Status | Progress | Notes |
+|-------|--------|----------|-------|
+| Discover | [Complete/In Progress/Not Started] | [X%] | [Notes] |
+| Define | [Complete/In Progress/Not Started] | [X%] | [Notes] |
+| Deliver | [Complete/In Progress/Not Started] | [X%] | [Notes] |
+
+### Completed ✅
+
+- [x] [Completed task 1]
+- [x] [Completed task 2]
+
+### In Progress ⏳
+
+- [ ] [Current task 1]
+- [ ] [Current task 2]
+
+### Blocked 🚫
+
+- [ ] [Blocked task] - Reason: [Blocker description]
+
+---
+
+### Decision Log
+
+| Date | Decision | Rationale | Impact |
+|------|----------|-----------|--------|
+| [Date] | [Decision made] | [Why] | [Effect] |
+| [Date] | [Decision made] | [Why] | [Effect] |
+
+---
+
+### Notes & Open Questions
+
+#### Open Questions
+
+1. [ ] [Question 1] - Assigned to: [Name]
+2. [ ] [Question 2] - Assigned to: [Name]
+
+#### Notes
+
+[Additional notes, decisions, or clarifications]
+
+---
+
+### Next Steps
+
+1. **Immediate Actions**:
+   - [ ] Action 1
+   - [ ] Action 2
+
+2. **Upcoming Milestones**:
+   - [ ] Milestone 1 - [Date]
+   - [ ] Milestone 2 - [Date]
+
+---
+
+**Document Version**: 1.0  
+**Created**: [Date]  
+**Status**: [Discovery | Definition | Delivery | Complete]  
+**Last Updated**: [Date]  
+**Owner**: [Name]
