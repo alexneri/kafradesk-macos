@@ -69,6 +69,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         storageWindowController = StorageWindowController()
         aboutWindowController = AboutWindowController()
 
+        mascotWindowController?.onShowNotes = { [weak self] in self?.showMemos() }
+        mascotWindowController?.onShowTasks = { [weak self] in self?.showTasks() }
+        mascotWindowController?.onShowStorage = { [weak self] in self?.showStorage() }
+        mascotWindowController?.onSurfaceWindows = { [weak self] in self?.surfaceOpenWindows() }
+
         statusBarController = StatusBarController(
             appState: appState,
             catalog: characterCatalog,
@@ -153,6 +158,24 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         taskWindowController?.showWindow(nil)
         taskWindowController?.window?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
+    }
+
+    /// Bring every currently-open tool window to the front (single-click mascot).
+    private func surfaceOpenWindows() {
+        let windows = [
+            memoWindowController?.window,
+            taskWindowController?.window,
+            storageWindowController?.window,
+            preferencesWindowController?.window,
+            aboutWindowController?.window
+        ].compactMap { $0 }.filter { $0.isVisible }
+
+        guard !windows.isEmpty else { return }
+        NSApp.activate(ignoringOtherApps: true)
+        for window in windows {
+            window.orderFront(nil)
+        }
+        windows.last?.makeKey()
     }
 
     private func showStorage() {

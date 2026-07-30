@@ -25,7 +25,7 @@ struct RONotesView: View {
                 editor
                 buttonRow
             }
-            .frame(width: 320, height: 320)
+            .frame(minWidth: 300, maxWidth: .infinity, minHeight: 280, maxHeight: .infinity)
         }
     }
 

@@ -21,7 +21,7 @@ struct ROTasksView: View {
                 taskList
                 bottomBar
             }
-            .frame(width: 320, height: 300)
+            .frame(minWidth: 300, maxWidth: .infinity, minHeight: 240, maxHeight: .infinity)
         }
     }
 

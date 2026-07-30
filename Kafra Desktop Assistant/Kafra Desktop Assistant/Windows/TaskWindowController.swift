@@ -4,18 +4,7 @@ import SwiftUI
 
 final class TaskWindowController: NSWindowController {
     init(modelContainer: ModelContainer) {
-        let window = ROBorderlessWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 360, height: 340),
-            styleMask: [.borderless],
-            backing: .buffered,
-            defer: false
-        )
-        window.isOpaque = false
-        window.backgroundColor = .clear
-        window.hasShadow = true
-        window.isMovableByWindowBackground = true
-        window.isReleasedWhenClosed = false
-
+        let window = ROWindowFactory.makeWindow(width: 360, height: 340, minWidth: 300, minHeight: 260)
         super.init(window: window)
 
         let rootView = ROTasksView(onClose: { [weak self] in
@@ -23,11 +12,8 @@ final class TaskWindowController: NSWindowController {
         })
         .environment(\.modelContext, modelContainer.mainContext)
 
-        let hostingView = NSHostingView(rootView: rootView)
-        hostingView.translatesAutoresizingMaskIntoConstraints = false
-        window.contentView = hostingView
-        window.setContentSize(hostingView.fittingSize)
-        window.center()
+        ROWindowFactory.install(rootView, in: window)
+        ROWindowFactory.cascade(window)
     }
 
     required init?(coder: NSCoder) {

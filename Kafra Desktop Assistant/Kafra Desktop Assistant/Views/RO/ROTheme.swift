@@ -85,6 +85,24 @@ struct ROButtonStyle: ButtonStyle {
     }
 }
 
+/// Bottom-right resize grip (three diagonal ticks), a hint that the window can
+/// be resized by dragging its edges.
+struct ROResizeGrip: View {
+    var body: some View {
+        Canvas { context, size in
+            let color = GraphicsContext.Shading.color(ROTheme.bevelShadow)
+            for offset in stride(from: CGFloat(2), through: 10, by: 4) {
+                var path = Path()
+                path.move(to: CGPoint(x: size.width - offset, y: size.height - 2))
+                path.addLine(to: CGPoint(x: size.width - 2, y: size.height - offset))
+                context.stroke(path, with: color, lineWidth: 1)
+            }
+        }
+        .frame(width: 12, height: 12)
+        .allowsHitTesting(false)
+    }
+}
+
 /// Small circular title-bar pip (minimize / close), beveled ring with a glyph.
 struct ROTitlePip: View {
     let systemName: String

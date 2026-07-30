@@ -3,29 +3,14 @@ import SwiftUI
 
 final class StorageWindowController: NSWindowController {
     init() {
-        let window = ROBorderlessWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 400, height: 360),
-            styleMask: [.borderless],
-            backing: .buffered,
-            defer: false
-        )
-        window.isOpaque = false
-        window.backgroundColor = .clear
-        window.hasShadow = true
-        window.isMovableByWindowBackground = true
-        window.isReleasedWhenClosed = false
-
+        let window = ROWindowFactory.makeWindow(width: 400, height: 360, minWidth: 320, minHeight: 260)
         super.init(window: window)
 
         let rootView = ROStorageView(onClose: { [weak self] in
             self?.window?.orderOut(nil)
         })
-
-        let hostingView = NSHostingView(rootView: rootView)
-        hostingView.translatesAutoresizingMaskIntoConstraints = false
-        window.contentView = hostingView
-        window.setContentSize(hostingView.fittingSize)
-        window.center()
+        ROWindowFactory.install(rootView, in: window)
+        ROWindowFactory.cascade(window)
     }
 
     required init?(coder: NSCoder) {
