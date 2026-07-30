@@ -136,6 +136,7 @@ final class DropHandler {
         return urls
     }
 
+    @discardableResult
     func handleDrop(urls: [URL], window: NSWindow?) async -> DropResult {
         var succeeded: [String] = []
         var failed: [(String, Error)] = []
