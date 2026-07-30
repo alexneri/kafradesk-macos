@@ -1,20 +1,38 @@
 import AppKit
 import SwiftUI
 
+/// Borderless window that lets its content (the RO chrome) draw the entire
+/// frame. Overrides key/main eligibility so text fields inside still work.
+private final class ROBorderlessWindow: NSWindow {
+    override var canBecomeKey: Bool { true }
+    override var canBecomeMain: Bool { true }
+}
+
 final class StorageWindowController: NSWindowController {
     init() {
-        let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 640, height: 480),
-            styleMask: [.titled, .closable, .resizable, .miniaturizable],
+        let window = ROBorderlessWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 400, height: 360),
+            styleMask: [.borderless],
             backing: .buffered,
             defer: false
         )
-        window.title = "Storage"
+        window.isOpaque = false
+        window.backgroundColor = .clear
+        window.hasShadow = true
+        window.isMovableByWindowBackground = true
         window.isReleasedWhenClosed = false
 
-        window.contentView = NSHostingView(rootView: NavigationStack { StorageBrowserView() })
-
         super.init(window: window)
+
+        let rootView = ROStorageView(onClose: { [weak self] in
+            self?.window?.orderOut(nil)
+        })
+
+        let hostingView = NSHostingView(rootView: rootView)
+        hostingView.translatesAutoresizingMaskIntoConstraints = false
+        window.contentView = hostingView
+        window.setContentSize(hostingView.fittingSize)
+        window.center()
     }
 
     required init?(coder: NSCoder) {
