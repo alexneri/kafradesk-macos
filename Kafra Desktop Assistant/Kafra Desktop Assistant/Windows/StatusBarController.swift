@@ -12,6 +12,7 @@ final class StatusBarController {
     private let hideMascot: () -> Void
     private let showPreferences: () -> Void
     private let showMemos: () -> Void
+    private let showTasks: () -> Void
     private let showStorage: () -> Void
     private let showAbout: () -> Void
     private let quit: () -> Void
@@ -29,6 +30,7 @@ final class StatusBarController {
         hideMascot: @escaping () -> Void,
         showPreferences: @escaping () -> Void,
         showMemos: @escaping () -> Void,
+        showTasks: @escaping () -> Void,
         showStorage: @escaping () -> Void,
         showAbout: @escaping () -> Void,
         quit: @escaping () -> Void
@@ -39,6 +41,7 @@ final class StatusBarController {
         self.hideMascot = hideMascot
         self.showPreferences = showPreferences
         self.showMemos = showMemos
+        self.showTasks = showTasks
         self.showStorage = showStorage
         self.showAbout = showAbout
         self.quit = quit
@@ -80,9 +83,13 @@ final class StatusBarController {
         prefsItem.target = self
         menu.addItem(prefsItem)
 
-        let memosItem = NSMenuItem(title: "Memos...", action: #selector(openMemos), keyEquivalent: "m")
+        let memosItem = NSMenuItem(title: "Notes...", action: #selector(openMemos), keyEquivalent: "m")
         memosItem.target = self
         menu.addItem(memosItem)
+
+        let tasksItem = NSMenuItem(title: "Tasks...", action: #selector(openTasks), keyEquivalent: "t")
+        tasksItem.target = self
+        menu.addItem(tasksItem)
 
         let storageItem = NSMenuItem(title: "Storage...", action: #selector(openStorage), keyEquivalent: "o")
         storageItem.target = self
@@ -174,6 +181,10 @@ final class StatusBarController {
 
     @objc private func openMemos() {
         showMemos()
+    }
+
+    @objc private func openTasks() {
+        showTasks()
     }
 
     @objc private func openStorage() {

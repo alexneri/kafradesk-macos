@@ -4,21 +4,30 @@ import SwiftUI
 
 final class MemoWindowController: NSWindowController {
     init(modelContainer: ModelContainer) {
-        let window = NSWindow(
-            contentRect: NSRect(x: 0, y: 0, width: 560, height: 420),
-            styleMask: [.titled, .closable, .resizable, .miniaturizable],
+        let window = ROBorderlessWindow(
+            contentRect: NSRect(x: 0, y: 0, width: 360, height: 360),
+            styleMask: [.borderless],
             backing: .buffered,
             defer: false
         )
-        window.title = "Memos"
+        window.isOpaque = false
+        window.backgroundColor = .clear
+        window.hasShadow = true
+        window.isMovableByWindowBackground = true
         window.isReleasedWhenClosed = false
 
-        let rootView = MemoListView()
-            .environment(\.modelContext, modelContainer.mainContext)
-
-        window.contentView = NSHostingView(rootView: rootView)
-
         super.init(window: window)
+
+        let rootView = RONotesView(onClose: { [weak self] in
+            self?.window?.orderOut(nil)
+        })
+        .environment(\.modelContext, modelContainer.mainContext)
+
+        let hostingView = NSHostingView(rootView: rootView)
+        hostingView.translatesAutoresizingMaskIntoConstraints = false
+        window.contentView = hostingView
+        window.setContentSize(hostingView.fittingSize)
+        window.center()
     }
 
     required init?(coder: NSCoder) {
