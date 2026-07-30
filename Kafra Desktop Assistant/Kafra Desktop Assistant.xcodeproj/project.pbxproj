@@ -8,6 +8,7 @@
 
 /* Begin PBXFileReference section */
 		B957E0A62F203197007CEE26 /* Kafra Desktop Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Kafra Desktop Assistant.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B957E0C12F203197007CEE26 /* KafraDesktopAssistantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KafraDesktopAssistantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,10 +17,22 @@
 			path = "Kafra Desktop Assistant";
 			sourceTree = "<group>";
 		};
+		B957E0C22F203197007CEE26 /* KafraDesktopAssistantTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = KafraDesktopAssistantTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		B957E0A32F203197007CEE26 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B957E0C42F203197007CEE26 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,6 +46,7 @@
 			isa = PBXGroup;
 			children = (
 				B957E0A82F203197007CEE26 /* Kafra Desktop Assistant */,
+				B957E0C22F203197007CEE26 /* KafraDesktopAssistantTests */,
 				B957E0A72F203197007CEE26 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +55,7 @@
 			isa = PBXGroup;
 			children = (
 				B957E0A62F203197007CEE26 /* Kafra Desktop Assistant.app */,
+				B957E0C12F203197007CEE26 /* KafraDesktopAssistantTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,6 +85,29 @@
 			productReference = B957E0A62F203197007CEE26 /* Kafra Desktop Assistant.app */;
 			productType = "com.apple.product-type.application";
 		};
+		B957E0C02F203197007CEE26 /* KafraDesktopAssistantTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B957E0C62F203197007CEE26 /* Build configuration list for PBXNativeTarget "KafraDesktopAssistantTests" */;
+			buildPhases = (
+				B957E0C32F203197007CEE26 /* Sources */,
+				B957E0C42F203197007CEE26 /* Frameworks */,
+				B957E0C52F203197007CEE26 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B957E0C92F203197007CEE26 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				B957E0C22F203197007CEE26 /* KafraDesktopAssistantTests */,
+			);
+			name = KafraDesktopAssistantTests;
+			packageProductDependencies = (
+			);
+			productName = KafraDesktopAssistantTests;
+			productReference = B957E0C12F203197007CEE26 /* KafraDesktopAssistantTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -82,6 +120,10 @@
 				TargetAttributes = {
 					B957E0A52F203197007CEE26 = {
 						CreatedOnToolsVersion = 26.1.1;
+					};
+					B957E0C02F203197007CEE26 = {
+						CreatedOnToolsVersion = 26.1.1;
+						TestTargetID = B957E0A52F203197007CEE26;
 					};
 				};
 			};
@@ -100,12 +142,30 @@
 			projectRoot = "";
 			targets = (
 				B957E0A52F203197007CEE26 /* Kafra Desktop Assistant */,
+				B957E0C02F203197007CEE26 /* KafraDesktopAssistantTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXContainerItemProxy section */
+		B957E0CA2F203197007CEE26 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B957E09E2F203197007CEE26 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B957E0A52F203197007CEE26;
+			remoteInfo = "Kafra Desktop Assistant";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		B957E0A42F203197007CEE26 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B957E0C52F203197007CEE26 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +182,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B957E0C32F203197007CEE26 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B957E0C92F203197007CEE26 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B957E0A52F203197007CEE26 /* Kafra Desktop Assistant */;
+			targetProxy = B957E0CA2F203197007CEE26 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		B957E0B12F203199007CEE26 /* Debug */ = {
@@ -333,6 +408,46 @@
 			};
 			name = Release;
 		};
+		B957E0C72F203197007CEE26 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QQPYNXLTJQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "moe.sei.kafra-desktop-assistant.tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kafra Desktop Assistant.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kafra Desktop Assistant";
+			};
+			name = Debug;
+		};
+		B957E0C82F203197007CEE26 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = QQPYNXLTJQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.1;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "moe.sei.kafra-desktop-assistant.tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Kafra Desktop Assistant.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Kafra Desktop Assistant";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -350,6 +465,15 @@
 			buildConfigurations = (
 				B957E0B42F203199007CEE26 /* Debug */,
 				B957E0B52F203199007CEE26 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B957E0C62F203197007CEE26 /* Build configuration list for PBXNativeTarget "KafraDesktopAssistantTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B957E0C72F203197007CEE26 /* Debug */,
+				B957E0C82F203197007CEE26 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

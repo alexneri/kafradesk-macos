@@ -3,11 +3,16 @@ import os
 
 enum CharacterImageProvider {
     private static var cache: [String: NSImage] = [:]
+    private static let lock = NSLock()
+    private static let warmQueue = DispatchQueue(label: "moe.sei.kda.image-warm", qos: .userInitiated)
 
     static func image(named name: String) -> NSImage? {
+        lock.lock()
         if let cached = cache[name] {
+            lock.unlock()
             return cached
         }
+        lock.unlock()
 
         guard let image = NSImage(named: name) else {
             AppLogger.app.error("Missing image asset: \(name)")
@@ -15,8 +20,25 @@ enum CharacterImageProvider {
         }
 
         let processed = image.applyingColorKeyFromTopLeft(tolerance: 8)
+        lock.lock()
         cache[name] = processed
+        lock.unlock()
         return processed
+    }
+
+    /// Pre-process the given asset names off the main thread so the first mascot
+    /// paint doesn't pay for the per-pixel color-key pass. Safe to call more than
+    /// once; already-cached names are skipped.
+    static func prewarm(_ names: [String]) {
+        warmQueue.async {
+            for name in names {
+                lock.lock()
+                let alreadyCached = cache[name] != nil
+                lock.unlock()
+                if alreadyCached { continue }
+                _ = image(named: name)
+            }
+        }
     }
 }
 

@@ -21,6 +21,12 @@ final class CharacterCatalog: ObservableObject {
         characters.first { $0.id == id }
     }
 
+    /// All image asset names referenced by the catalog (base + blink frames),
+    /// used to pre-warm the image cache off the main thread.
+    var allImageNames: [String] {
+        characters.flatMap { [$0.imageName, $0.blinkImageName].compactMap { $0 } }
+    }
+
     func defaultCharacter(for edition: CharacterEdition) -> CharacterAsset? {
         characters(for: edition).first
     }

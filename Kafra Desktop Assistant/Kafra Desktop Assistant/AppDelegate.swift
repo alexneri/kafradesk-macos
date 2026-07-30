@@ -50,6 +50,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         savePreferences()
         bindPreferences()
 
+        // Warm the image cache off the main thread so the mascot's first paint
+        // doesn't pay for the color-key pass.
+        CharacterImageProvider.prewarm(characterCatalog.allImageNames)
+
         _ = BlurbController.shared
         mascotWindowController = MascotWindowController(
             appState: appState,
@@ -82,6 +86,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     private func bindPreferences() {
+        // Mascot visibility has a side effect (show/hide) beyond persistence.
         appState.$isMascotVisible
             .sink { [weak self] isVisible in
                 self?.applyMascotVisibility(isVisible)
@@ -89,23 +94,20 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             }
             .store(in: &cancellables)
 
-        appState.$alwaysOnTop
-            .sink { [weak self] _ in self?.savePreferences() }
-            .store(in: &cancellables)
+        // Discrete preference changes: persist immediately, on one merged stream.
+        Publishers.Merge4(
+            appState.$alwaysOnTop.map { _ in () },
+            appState.$selectedCharacterID.map { _ in () },
+            appState.$selectedEdition.map { _ in () },
+            appState.$animationsEnabled.map { _ in () }
+        )
+        .sink { [weak self] in self?.savePreferences() }
+        .store(in: &cancellables)
 
-        appState.$selectedCharacterID
-            .sink { [weak self] _ in self?.savePreferences() }
-            .store(in: &cancellables)
-
-        appState.$selectedEdition
-            .sink { [weak self] _ in self?.savePreferences() }
-            .store(in: &cancellables)
-
-        appState.$animationsEnabled
-            .sink { [weak self] _ in self?.savePreferences() }
-            .store(in: &cancellables)
-
+        // Window position fires continuously while dragging the mascot; debounce
+        // so we don't JSON-encode + write UserDefaults on every drag tick.
         appState.$windowPosition
+            .debounce(for: .milliseconds(400), scheduler: RunLoop.main)
             .sink { [weak self] _ in self?.savePreferences() }
             .store(in: &cancellables)
     }

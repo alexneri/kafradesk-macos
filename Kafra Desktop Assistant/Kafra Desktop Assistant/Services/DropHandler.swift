@@ -1,5 +1,6 @@
 import AppKit
 import Foundation
+import UniformTypeIdentifiers
 
 enum DropValidationError: LocalizedError {
     case pathTraversal
@@ -40,8 +41,13 @@ enum DropValidator {
             throw DropValidationError.unreadable
         }
 
-        let resolvedURL = url.resolvingSymlinksInPath()
-        if resolvedURL != url {
+        // Reject only when the dropped item *itself* is a symlink. The previous
+        // check compared the fully resolved path against the original, which
+        // also fired for any file living under a symlinked ancestor (/tmp ->
+        // /private/tmp, /var, many /Volumes mounts), falsely rejecting valid
+        // drops from those locations.
+        let symlinkValues = try? url.resourceValues(forKeys: [.isSymbolicLinkKey])
+        if symlinkValues?.isSymbolicLink == true {
             throw DropValidationError.symlinkDetected
         }
 
@@ -59,17 +65,13 @@ enum DropValidator {
         }
 
         let targetURL = storageURL.appendingPathComponent(sanitizedName)
-        let canonicalTarget = targetURL.resolvingSymlinksInPath().standardizedFileURL
-        let canonicalStorage = storageURL.resolvingSymlinksInPath().standardizedFileURL
-
-        let storagePath = canonicalStorage.path
-        if canonicalTarget.path != storagePath && !canonicalTarget.path.hasPrefix(storagePath + "/") {
+        switch PathSecurity.containmentViolation(for: targetURL, within: storageURL) {
+        case .outside:
             throw DropValidationError.outsideStorage
-        }
-
-        let components = canonicalTarget.pathComponents
-        if components.contains("..") || components.contains(".") {
+        case .invalidComponents:
             throw DropValidationError.pathTraversal
+        case nil:
+            break
         }
 
         return targetURL
@@ -86,25 +88,7 @@ enum DropValidator {
     }
 
     static func sanitizeFileName(_ name: String) -> String {
-        var sanitized = name
-        sanitized = sanitized.replacingOccurrences(of: "/", with: "-")
-        sanitized = sanitized.replacingOccurrences(of: "\\", with: "-")
-        sanitized = sanitized.components(separatedBy: .controlCharacters).joined()
-        sanitized = sanitized.replacingOccurrences(of: "\0", with: "")
-        sanitized = sanitized.trimmingCharacters(in: CharacterSet(charactersIn: ". "))
-        sanitized = sanitized.replacingOccurrences(of: "  +", with: " ", options: .regularExpression)
-
-        if sanitized.utf8.count > 255 {
-            let ext = (sanitized as NSString).pathExtension
-            let base = (sanitized as NSString).deletingPathExtension
-            var truncated = String(base.prefix(240))
-            if !ext.isEmpty {
-                truncated += "." + ext
-            }
-            sanitized = truncated
-        }
-
-        return sanitized
+        PathSecurity.sanitizeFileName(name)
     }
 }
 
@@ -131,6 +115,25 @@ final class DropHandler {
 
     init(storageURL: URL = AppPaths.storageDirectory) {
         self.storageURL = storageURL
+    }
+
+    /// Extract file URLs from drag-and-drop item providers. Shared by the mascot
+    /// and storage-browser drop targets so the extraction logic lives in one place.
+    static func loadFileURLs(from providers: [NSItemProvider]) async -> [URL] {
+        var urls: [URL] = []
+        let identifier = UTType.fileURL.identifier
+
+        for provider in providers where provider.hasItemConformingToTypeIdentifier(identifier) {
+            guard let item = try? await provider.loadItem(forTypeIdentifier: identifier) else { continue }
+            if let url = item as? URL {
+                urls.append(url)
+            } else if let data = item as? Data,
+                      let url = URL(dataRepresentation: data, relativeTo: nil) {
+                urls.append(url)
+            }
+        }
+
+        return urls
     }
 
     func handleDrop(urls: [URL], window: NSWindow?) async -> DropResult {

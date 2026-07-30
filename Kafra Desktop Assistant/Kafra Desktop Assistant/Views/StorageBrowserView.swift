@@ -107,21 +107,7 @@ struct StorageBrowserView: View {
 
     private func handleDrop(providers: [NSItemProvider]) {
         Task {
-            var urls: [URL] = []
-
-            for provider in providers {
-                if provider.hasItemConformingToTypeIdentifier(UTType.fileURL.identifier) {
-                    if let item = try? await provider.loadItem(forTypeIdentifier: UTType.fileURL.identifier) {
-                        if let url = item as? URL {
-                            urls.append(url)
-                        } else if let data = item as? Data,
-                                  let url = URL(dataRepresentation: data, relativeTo: nil) {
-                            urls.append(url)
-                        }
-                    }
-                }
-            }
-
+            let urls = await DropHandler.loadFileURLs(from: providers)
             guard !urls.isEmpty else { return }
 
             let handler = DropHandler()
