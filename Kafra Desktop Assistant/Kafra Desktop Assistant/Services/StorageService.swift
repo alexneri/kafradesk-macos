@@ -55,32 +55,44 @@ final class StorageService: ObservableObject {
 
     private let storageURL: URL
     private let fileManager: FileManager
+    private static let ioQueue = DispatchQueue(label: "moe.sei.kda.storage-io", qos: .userInitiated)
 
     init(storageURL: URL = AppPaths.storageDirectory, fileManager: FileManager = .default) {
         self.storageURL = storageURL
         self.fileManager = fileManager
     }
 
+    /// Enumerate the storage directory off the main thread and publish the
+    /// result back on main. Keeps the UI responsive even for large folders.
     func refresh() {
-        do {
-            let urls = try fileManager.contentsOfDirectory(
-                at: storageURL,
-                includingPropertiesForKeys: [.isDirectoryKey, .fileSizeKey, .contentModificationDateKey],
-                options: [.skipsHiddenFiles]
-            )
-            let mapped = urls.compactMap { url -> StorageItem? in
-                let values = try? url.resourceValues(forKeys: [.isDirectoryKey, .fileSizeKey, .contentModificationDateKey])
-                return StorageItem(
-                    url: url,
-                    name: url.lastPathComponent,
-                    isDirectory: values?.isDirectory ?? false,
-                    size: values?.fileSize.map { Int64($0) },
-                    modifiedDate: values?.contentModificationDate
+        let storageURL = self.storageURL
+        let fileManager = self.fileManager
+        Self.ioQueue.async { [weak self] in
+            let mapped: [StorageItem]
+            do {
+                let urls = try fileManager.contentsOfDirectory(
+                    at: storageURL,
+                    includingPropertiesForKeys: [.isDirectoryKey, .fileSizeKey, .contentModificationDateKey],
+                    options: [.skipsHiddenFiles]
                 )
+                mapped = urls.compactMap { url -> StorageItem? in
+                    let values = try? url.resourceValues(forKeys: [.isDirectoryKey, .fileSizeKey, .contentModificationDateKey])
+                    return StorageItem(
+                        url: url,
+                        name: url.lastPathComponent,
+                        isDirectory: values?.isDirectory ?? false,
+                        size: values?.fileSize.map { Int64($0) },
+                        modifiedDate: values?.contentModificationDate
+                    )
+                }
+                .sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
+            } catch {
+                AppLogger.storage.error("Failed to list storage directory: \(error.localizedDescription)")
+                return
             }
-            items = mapped.sorted { $0.name.localizedCaseInsensitiveCompare($1.name) == .orderedAscending }
-        } catch {
-            AppLogger.storage.error("Failed to list storage directory: \(error.localizedDescription)")
+            DispatchQueue.main.async {
+                self?.items = mapped
+            }
         }
     }
 
@@ -185,36 +197,17 @@ final class StorageService: ObservableObject {
     }
 
     func sanitizeFileName(_ name: String) -> String {
-        var sanitized = name.replacingOccurrences(of: "/", with: "-")
-        sanitized = sanitized.replacingOccurrences(of: "\\", with: "-")
-        sanitized = sanitized.components(separatedBy: .controlCharacters).joined()
-        sanitized = sanitized.replacingOccurrences(of: "\0", with: "")
-
-        while sanitized.hasPrefix(".") {
-            sanitized.removeFirst()
-        }
-
-        if sanitized.count > 255 {
-            let ext = (sanitized as NSString).pathExtension
-            let base = (sanitized as NSString).deletingPathExtension
-            sanitized = String(base.prefix(250)) + "." + ext
-        }
-
-        return sanitized.trimmingCharacters(in: .whitespacesAndNewlines)
+        PathSecurity.sanitizeFileName(name)
     }
 
     private func validatePath(_ url: URL) throws {
-        let canonicalURL = url.resolvingSymlinksInPath().standardizedFileURL
-        let canonicalStorage = storageURL.resolvingSymlinksInPath().standardizedFileURL
-
-        let storagePath = canonicalStorage.path
-        if canonicalURL.path != storagePath && !canonicalURL.path.hasPrefix(storagePath + "/") {
+        switch PathSecurity.containmentViolation(for: url, within: storageURL) {
+        case .outside:
             throw StorageError.pathTraversal("File is outside storage directory")
-        }
-
-        let components = canonicalURL.pathComponents
-        if components.contains("..") || components.contains(".") {
+        case .invalidComponents:
             throw StorageError.invalidPath("Path contains invalid components")
+        case nil:
+            break
         }
     }
 
