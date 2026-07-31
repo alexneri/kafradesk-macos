@@ -16,6 +16,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private var mascotWindowController: MascotWindowController?
     private var preferencesWindowController: PreferencesWindowController?
     private var memoWindowController: MemoWindowController?
+    private var taskWindowController: TaskWindowController?
     private var storageWindowController: StorageWindowController?
     private var aboutWindowController: AboutWindowController?
     private var statusBarController: StatusBarController?
@@ -23,6 +24,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     override init() {
         let schema = Schema([
             Memo.self,
+            TaskItem.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
         do {
@@ -63,8 +65,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         preferencesWindowController = PreferencesWindowController(appState: appState, catalog: characterCatalog)
         memoWindowController = MemoWindowController(modelContainer: modelContainer)
+        taskWindowController = TaskWindowController(modelContainer: modelContainer)
         storageWindowController = StorageWindowController()
         aboutWindowController = AboutWindowController()
+
+        mascotWindowController?.onShowNotes = { [weak self] in self?.showMemos() }
+        mascotWindowController?.onShowTasks = { [weak self] in self?.showTasks() }
+        mascotWindowController?.onShowStorage = { [weak self] in self?.showStorage() }
+        mascotWindowController?.onSurfaceWindows = { [weak self] in self?.surfaceOpenWindows() }
 
         statusBarController = StatusBarController(
             appState: appState,
@@ -73,6 +81,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             hideMascot: { [weak self] in self?.hideMascot() },
             showPreferences: { [weak self] in self?.showPreferences() },
             showMemos: { [weak self] in self?.showMemos() },
+            showTasks: { [weak self] in self?.showTasks() },
             showStorage: { [weak self] in self?.showStorage() },
             showAbout: { [weak self] in self?.showAbout() },
             quit: { [weak self] in self?.quit() }
@@ -143,6 +152,30 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         memoWindowController?.showWindow(nil)
         memoWindowController?.window?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
+    }
+
+    private func showTasks() {
+        taskWindowController?.showWindow(nil)
+        taskWindowController?.window?.makeKeyAndOrderFront(nil)
+        NSApp.activate(ignoringOtherApps: true)
+    }
+
+    /// Bring every currently-open tool window to the front (single-click mascot).
+    private func surfaceOpenWindows() {
+        let windows = [
+            memoWindowController?.window,
+            taskWindowController?.window,
+            storageWindowController?.window,
+            preferencesWindowController?.window,
+            aboutWindowController?.window
+        ].compactMap { $0 }.filter { $0.isVisible }
+
+        guard !windows.isEmpty else { return }
+        NSApp.activate(ignoringOtherApps: true)
+        for window in windows {
+            window.orderFront(nil)
+        }
+        windows.last?.makeKey()
     }
 
     private func showStorage() {

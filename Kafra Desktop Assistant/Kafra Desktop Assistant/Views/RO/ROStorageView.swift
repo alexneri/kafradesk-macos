@@ -31,7 +31,7 @@ struct ROStorageView: View {
                     bottomBar
                 }
             }
-            .frame(width: 360, height: 300)
+            .frame(minWidth: 300, maxWidth: .infinity, minHeight: 240, maxHeight: .infinity)
         }
         .onAppear { storageService.refresh() }
         .onReceive(NotificationCenter.default.publisher(for: NSApplication.willBecomeActiveNotification)) { _ in
@@ -57,7 +57,8 @@ struct ROStorageView: View {
             .foregroundStyle(ROTheme.textTitle)
             .rotationEffect(.degrees(-90))
             .fixedSize()
-            .frame(width: 16, height: 300, alignment: .center)
+            .frame(width: 16)
+            .frame(maxHeight: .infinity)
             .background(
                 ZStack {
                     LinearGradient(colors: [ROTheme.titleTop, ROTheme.titleBottom],

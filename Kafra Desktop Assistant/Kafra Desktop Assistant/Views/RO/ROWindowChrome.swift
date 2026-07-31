@@ -16,6 +16,9 @@ struct ROWindowChrome<Content: View>: View {
                 .padding(6)
         }
         .background(ROPanelBackground())
+        .overlay(alignment: .bottomTrailing) {
+            ROResizeGrip().padding(3)
+        }
     }
 
     private var titleBar: some View {
