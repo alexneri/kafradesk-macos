@@ -11,8 +11,7 @@ Kafra Desktop Assistant is a macOS SwiftUI app that ports the original Windows [
 - `Kafra Desktop Assistant/Kafra Desktop Assistant/` — Main target with views, models, and assets.
 - `KDA-Data/` — Legacy asset files from the original Windows release.
 - `kafra-desktop-assistant-legacycode/` — Original Windows codebase for reference.
-- `kda-docs/` — Architecture, security, migration, and task documentation.
-- `_bmad/` — BMad Method configuration and workflow tooling.
+- `scripts/` — Release build, notarization and DMG scripts.
 
 ## Requirements
 
@@ -54,7 +53,4 @@ xcodebuild -project "Kafra Desktop Assistant/Kafra Desktop Assistant.xcodeproj" 
 
 ## Documentation
 
-- Architecture: `kda-docs/explanation/architecture.md`
-- Security: `kda-docs/explanation/security.md`
-- Migration overview: `kda-docs/migration/overview.md`
-- Task roadmap: `kda-docs/tasks/TASK-REVIEW-SUMMARY.md`
+Plans, design, architecture, security, migration notes and the roadmap live in ideahub: [`alexneri/ideahub/kafradesk`](https://github.com/alexneri/ideahub/tree/main/kafradesk). Start at `docs/index.md`.

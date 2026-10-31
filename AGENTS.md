@@ -7,8 +7,7 @@
 - `Kafra Desktop Assistant/Kafra Desktop Assistant/` is the main target: SwiftUI views, SwiftData models, and `Assets.xcassets`.
 - `KDA-Data/` holds legacy asset files (cursors, bitmaps, regions) from the original Windows release.
 - `kafra-desktop-assistant-legacycode/` contains the original Windows codebase for reference when porting behaviors.
-- `kda-docs/` provides architectural, security, and migration documentation for the legacy app and porting context.
-- `_bmad/` contains the BMad Method modules, workflows, and agent definitions used for structured planning and documentation.
+- Planning, design, architecture, security, migration and task docs live in ideahub: [`ideahub/kafradesk/`](https://github.com/alexneri/ideahub/tree/main/kafradesk) (local: `~/Repository/ideahub/kafradesk/`). This repo holds code and legacy reference only.
 
 ### Module Organization Principles
 - Group related functionality together (e.g., `Core/`, `Features/`, `Services/`)
@@ -181,7 +180,7 @@ When applicable to feature complexity:
 3. **Strategic Consistency**
    - Align tactical patterns (e.g., repositories, services) with strategic vision
    - Adopt patterns only when they solve domain complexity
-   - Document domain discoveries in `kda-docs/`
+   - Document domain discoveries in `ideahub/kafradesk/docs/`
 
 ### Error Handling
 
@@ -425,7 +424,7 @@ final class MemoServiceTests: XCTestCase {
 - Include a brief summary of changes
 - Add testing notes (or "not run" if untested)
 - Include screenshots for UI changes
-- Link related documentation updates in `kda-docs/`
+- Link related documentation updates in `ideahub/kafradesk/docs/`
 - Reference issue numbers (e.g., "Fixes #42")
 - Ensure all tests pass
 - Run SwiftLint and fix warnings
@@ -442,29 +441,10 @@ final class MemoServiceTests: XCTestCase {
 
 ---
 
-## BMad Method Usage
-
-### Core Configuration
-- Core configuration lives in `_bmad/core/config.yaml`
-- Generated artifacts should go to `_bmad-output/` (see `output_folder`)
-- Use `_bmad/bmm/data/documentation-standards.md` as the style baseline when producing docs
-
-### Best Practices
-- Prefer updating BMad configs or module data over editing generated outputs by hand
-- If you add BMad workflows or agents, register them in `_bmad/_config/` manifests to keep discovery consistent
-- Link BMad outputs to relevant `kda-docs/` sections
-- Version control BMad configs, not generated artifacts
-
----
-
 ## Documentation Standards
 
 ### Where to Document
-- **Architecture decisions:** `kda-docs/explanation/architecture.md`
-- **Security considerations:** `kda-docs/explanation/security.md`
-- **API reference:** `kda-docs/reference/`
-- **Migration guides:** `kda-docs/migration/`
-- **Implementation tasks:** `kda-docs/tasks/`
+All docs live in [`ideahub/kafradesk/`](https://github.com/alexneri/ideahub/tree/main/kafradesk); start from its `docs/index.md`. Plans, architecture decisions, security notes, migration guides, task plans and stories go there, on a `claude/<topic>` branch with a PR. Keep only code-adjacent notes (README, this file) in this repo.
 
 ### Documentation Style
 - Follow Diataxis framework (Tutorials, How-To, Reference, Explanation)
@@ -624,10 +604,9 @@ For file operations, user input handling, and system integration, apply heighten
 ## Quick Reference
 
 ### Essential Reading (New Developers)
-1. **Start here:** `kda-docs/explanation/architecture.md` — System context
-2. **Security:** `kda-docs/explanation/security.md` — Risk considerations
-3. **Tasks:** `kda-docs/tasks/TASK-REVIEW-SUMMARY.md` — Implementation roadmap
-4. **Migration:** `kda-docs/migration/overview.md` — Windows to macOS porting
+1. **Start here:** [`ideahub/kafradesk/docs/index.md`](https://github.com/alexneri/ideahub/tree/main/kafradesk/docs/index.md) — map of all docs
+2. **Status and roadmap:** `ideahub/kafradesk/README.md`
+3. **Legacy behaviour:** `kafra-desktop-assistant-legacycode/` (VB6 source) and `KDA-Data/` (assets) in this repo
 
 ### Code Templates
 
